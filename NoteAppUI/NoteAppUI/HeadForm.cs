@@ -13,10 +13,7 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
-        public Note _note;
         private Project project = new Project();
-        private List<Note> _notes = new List<Note>();
-        private static string DocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/NoteApp.txt";
 
         public MainForm()
         {  
@@ -35,37 +32,13 @@ namespace NoteAppUI
 
         private void NoteApp_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         //Кнопка для создания заметки
         private void AddButton_Click(object sender, EventArgs e)
         {
-            //Переход на форму для создания заметки
-            var form = new AddNote ();
-            form.ShowDialog();
-
-            //Проверка подтверждения с формы
-            if (form.DialogResult == DialogResult.OK)
-            { 
-                //Записываем данные в локальные переменные
-                var MainName = form._currentNote.Name;
-                var MainCategory = form._currentNote.NoteCategory;
-                var MainText = form._currentNote.NoteText;
-                var MainCreationDate = form._currentNote.CreationTime;
-                var MainModifiedDate = DateTime.Now;
-
-                //Записываем в TitleListBox данные из MainName по индексу
-                TitleListBox.Items.Add(MainName);
-
-                //Записываем текущую заметку _currentNote в список _notes
-                _notes.Add(form._currentNote);
-
-                //Записываем текущую заметку _currentNote в список Notes
-                project.Notes.Add(form._currentNote);
-
-                ProjectManager.SaveToFIle();
-            }
+            AddFunction();
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
@@ -89,14 +62,13 @@ namespace NoteAppUI
                     Note _clicklist;
 
                     //Присваиваем переменной данные из списка по индексу
-                    _clicklist = _notes[TitleListBox.SelectedIndex];
+                    _clicklist = project.Notes[TitleListBox.SelectedIndex];
 
                     //Присваиваем полям значения из переменной списка
                     NameTextBox.Text = _clicklist.Name;
                     NoteTextTextBox.Text = _clicklist.NoteText;
                     HeadNoteCategoryComboBox.Text = _clicklist.NoteCategory;
                     CreateDateTimePicker.Value = _clicklist.CreationTime;
-
                 }
             }
             catch
@@ -123,79 +95,13 @@ namespace NoteAppUI
         //Кнопка для удаления заметки
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Вызываем форму для удаления заметки
-                DialogResult result = MessageBox.Show("Действительно хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.OK)
-                {
-                    //Получаем индекс текущей выбранной заметки
-                    var selectedIndex = TitleListBox.SelectedIndex;
-                    var selectedNote = project.Notes[selectedIndex];
-
-                    //Удаляем данные по выбранному индексу
-                    TitleListBox.Items.RemoveAt(selectedIndex);
-                    project.Notes.RemoveAt(selectedIndex);
-
-                    //Очищаем поля от записанных в них значений
-                    NameTextBox.Clear();
-                    NoteTextTextBox.Clear();
-                    HeadNoteCategoryComboBox.Text = string.Empty;
-                }
-            }
-            catch
-            {
-                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                this.Show();
-            }
+            DeleteFunction();
         }
 
         //Кнопка для редактирования заметки
         private void EditButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Получаем текущую выбранную заметку
-                var selectedIndex = TitleListBox.SelectedIndex;
-                var selectedNotes = project.Notes[selectedIndex];
-
-                //Создаем форму
-                var edit = new EditForm();
-
-                //Передаем форме данные
-                edit.EditNote = selectedNotes;
-
-                //Отображаем форму для редактирования
-                edit.ShowDialog();
-
-                //Забираем измененные данные
-                var updatedNote = edit.EditNote;
-
-                //Удаляем старые данные по выбранному индексу и заменяем их на обновленные
-                TitleListBox.Items.RemoveAt(selectedIndex);
-                project.Notes.RemoveAt(selectedIndex);
-
-                project.Notes.Insert(selectedIndex, updatedNote);
-
-                //Присваиваем значения локальным переменным
-                var MainName = edit.EditNote.Name;
-                var MainCategory = edit.EditNote.NoteCategory;
-                var MainText = edit.EditNote.NoteText;
-                var MainModifiedDate = edit.EditNote.ModifiedTime;
-                TitleListBox.Items.Insert(selectedIndex, MainName);
-
-                //Передаем обновленные данные на элементы формы
-                NameTextBox.Text = MainName;
-                NoteTextTextBox.Text = MainText;
-                HeadNoteCategoryComboBox.Text = MainCategory;
-                ModifiedDateTimePicker.Value = MainModifiedDate;
-            }
-            catch
-            {
-                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                this.Show();
-            }
-
+            EditFunction();
         }
 
         private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -205,104 +111,17 @@ namespace NoteAppUI
 
         private void создатьНовуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Переход на форму для создания заметки
-            var form = new AddNote();
-            form.ShowDialog();
-
-            //Проверка подтверждения с формы
-            if (form.DialogResult == DialogResult.OK)
-            {
-                //Записываем данные в локальные переменные
-                var MainName = form._currentNote.Name;
-                var MainCategory = form._currentNote.NoteCategory;
-                var MainText = form._currentNote.NoteText;
-                var MainCreationDate = form._currentNote.CreationTime;
-                var MainModifiedDate = DateTime.Now;
-
-                //Записываем в TitleListBox данные из MainName по индексу
-                TitleListBox.Items.Add(MainName);
-
-                //Записываем текущую заметку _currentNote в список _notes
-                _notes.Add(form._currentNote);
-
-                //Записываем текущую заметку _currentNote в список Notes
-                project.Notes.Add(form._currentNote);
-            }
+            AddFunction();
         }
 
         private void редактироватьТекущуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Получаем текущую выбранную заметку
-                var selectedIndex = TitleListBox.SelectedIndex;
-                var selectedNotes = project.Notes[selectedIndex];
-
-                //Создаем форму
-                var edit = new EditForm();
-
-                //Передаем форме данные
-                edit.EditNote = selectedNotes;
-
-                //Отображаем форму для редактирования
-                edit.ShowDialog();
-
-                //Забираем измененные данные
-                var updatedNote = edit.EditNote;
-
-                //Удаляем старые данные по выбранному индексу и заменяем их на обновленные
-                TitleListBox.Items.RemoveAt(selectedIndex);
-                project.Notes.RemoveAt(selectedIndex);
-
-                project.Notes.Insert(selectedIndex, updatedNote);
-
-                //Присваиваем значения локальным переменным
-                var MainName = edit.EditNote.Name;
-                var MainCategory = edit.EditNote.NoteCategory;
-                var MainText = edit.EditNote.NoteText;
-                var MainModifiedDate = edit.EditNote.ModifiedTime;
-                TitleListBox.Items.Insert(selectedIndex, MainName);
-
-                //Передаем обновленные данные на элементы формы
-                NameTextBox.Text = MainName;
-                NoteTextTextBox.Text = MainText;
-                HeadNoteCategoryComboBox.Text = MainCategory;
-                ModifiedDateTimePicker.Value = MainModifiedDate;
-            }
-            catch
-            {
-                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                this.Show();
-            }
+            EditFunction();
         }
 
         private void удалитьТекущуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Вызываем форму для удаления заметки
-                DialogResult result = MessageBox.Show("Действительно хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.OK)
-                {
-                    //Получаем индекс текущей выбранной заметки
-                    var selectedIndex = TitleListBox.SelectedIndex;
-                    var selectedNote = project.Notes[selectedIndex];
-
-                    //Удаляем данные по выбранному индексу
-                    TitleListBox.Items.RemoveAt(selectedIndex);
-                    project.Notes.RemoveAt(selectedIndex);
-
-                    //Очищаем поля от записанных в них значений
-                    NameTextBox.Clear();
-                    NoteTextTextBox.Clear();
-                    HeadNoteCategoryComboBox.Text = string.Empty;
-                }
-            }
-            catch
-            {
-                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                this.Show();
-            }
+            DeleteFunction();
         }
 
         private void оПрограммеF1ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -328,6 +147,118 @@ namespace NoteAppUI
             {
                 var about = new AboutForm();
                 about.Show();
+            }
+        }
+
+        //Метод создающий заметку
+        private void AddFunction()
+        {
+            //Переход на форму для создания заметки
+            var form = new AddNote();
+            form.ShowDialog();
+
+            //Проверка подтверждения с формы
+            if (form.DialogResult == DialogResult.OK)
+            {
+                //Записываем данные в локальные переменные
+                var MainName = form._currentNote.Name;
+                var MainCategory = form._currentNote.NoteCategory;
+                var MainText = form._currentNote.NoteText;
+                var MainCreationDate = form._currentNote.CreationTime;
+                var MainModifiedDate = DateTime.Now;
+
+                //Записываем в TitleListBox данные из MainName по индексу
+                TitleListBox.Items.Add(MainName);
+
+                //Записываем текущую заметку _currentNote в список Notes
+                project.Notes.Add(form._currentNote);
+
+                //Вызываем SaveToFile из класса ProjectManager
+                ProjectManager.SaveToFIle(project, @"C:\Users\Голиков Юрий\NoteApp.txt");
+            }
+        }
+
+        //Метод, редактирующий заметку
+        private void EditFunction()
+        {
+            try
+            {
+                //Получаем текущую выбранную заметку
+                var selectedIndex = TitleListBox.SelectedIndex;
+                var selectedNotes = project.Notes[selectedIndex];
+
+                //Создаем форму
+                var edit = new EditForm();
+
+                //Передаем форме данные
+                edit.EditNote = selectedNotes;
+
+                //Отображаем форму для редактирования
+                edit.ShowDialog();
+
+                //Забираем измененные данные
+                var updatedNote = edit.EditNote;
+
+                //Удаляем старые данные по выбранному индексу и заменяем их на обновленные
+                TitleListBox.Items.RemoveAt(selectedIndex);
+                project.Notes.RemoveAt(selectedIndex);
+
+                project.Notes.Insert(selectedIndex, updatedNote);
+
+                //Вызываем SaveToFile из класса ProjectManager
+                ProjectManager.SaveToFIle(project, @"C:\Users\Голиков Юрий\NoteApp.txt");
+
+                //Присваиваем значения локальным переменным
+                var MainName = edit.EditNote.Name;
+                var MainCategory = edit.EditNote.NoteCategory;
+                var MainText = edit.EditNote.NoteText;
+                var MainModifiedDate = edit.EditNote.ModifiedTime;
+                TitleListBox.Items.Insert(selectedIndex, MainName);
+
+                //Передаем обновленные данные на элементы формы
+                NameTextBox.Text = MainName;
+                NoteTextTextBox.Text = MainText;
+                HeadNoteCategoryComboBox.Text = MainCategory;
+                ModifiedDateTimePicker.Value = MainModifiedDate;
+            }
+            catch
+            {
+                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                this.Show();
+            }
+        }
+
+
+        //Метод, удаляющий заметку
+        private void DeleteFunction()
+        {
+            try
+            {
+                //Вызываем форму для удаления заметки
+                DialogResult result = MessageBox.Show("Действительно хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    //Получаем индекс текущей выбранной заметки
+                    var selectedIndex = TitleListBox.SelectedIndex;
+                    var selectedNote = project.Notes[selectedIndex];
+
+                    //Удаляем данные по выбранному индексу
+                    TitleListBox.Items.RemoveAt(selectedIndex);
+                    project.Notes.RemoveAt(selectedIndex);
+
+                    //Вызываем SaveToFile из класса ProjectManager
+                    ProjectManager.SaveToFIle(project, @"C:\Users\Голиков Юрий\NoteApp.txt");
+
+                    //Очищаем поля от записанных в них значений
+                    NameTextBox.Clear();
+                    NoteTextTextBox.Clear();
+                    HeadNoteCategoryComboBox.Text = string.Empty;
+                }
+            }
+            catch
+            {
+                DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                this.Show();
             }
         }
     }

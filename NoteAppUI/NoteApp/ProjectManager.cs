@@ -9,55 +9,39 @@ using Newtonsoft.Json;
 namespace NoteApp
 {
     /// <summary>
-    /// Класс ProjectManager, содержащий методы Serialization и Deserialization
+    /// Класс ProjectManager, содержащий методы SaveToFile и LoadFromFile
     /// </summary>
-    public class ProjectManager
+    public static class ProjectManager
     {
-        //private static string DocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/NoteApp.txt";
-
         /// <summary>
-        /// Метод Serialization, который сериализует объект
+        /// Метод SaveToFile, который сериализует объект
         /// </summary>
-        public static void SaveToFIle()
+        public static void SaveToFIle(Project Notes, string ProjectList)
         {
-            Project project = new Project();
-            string ProjectList= JsonConvert.SerializeObject(project.Notes, Formatting.Indented);
+            ProjectList= JsonConvert.SerializeObject(Notes, Formatting.Indented);
             StreamWriter SW = new StreamWriter(new FileStream(@"C:\Users\Голиков Юрий\NoteApp.txt", FileMode.Create, FileAccess.Write));
             SW.Write(ProjectList);
             SW.Close();
-
-            /*Project project = new Project();
-            Note note = new Note();
-            //Создаем экземпляр сериализатора
-            JsonSerializer serializer = new JsonSerializer();
-
-            //Открываем поток для записи в файл с указанием пути
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\Голиков Юрий\NoteApp.txt"))
-            using (JsonWriter writer=new JsonTextWriter(sw))
-            {
-                //Вызываем сериализацию и передаем объект, который хотим сериализовать
-                serializer.Serialize(writer, note);
-            }*/
         }
 
         /// <summary>
-        /// Метод Deserialization, который десериализует объект
+        /// Метод LoadFromFile, который десериализует объект
         /// </summary>
-        public static void Deserialization()
+        public static void LoadFromFile(string ProjectList)
         {
-            //Создаем переменную в которую помещаем результат десериализации
-            Note note = null;
+                //Создаем переменную в которую помещаем результат десериализации
+                Note note = null;
 
-            //Создаем результат сериализации
-            JsonSerializer serializer = new JsonSerializer();
+                //Создаем результат сериализации
+                JsonSerializer serializer = new JsonSerializer();
 
-            //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(@"\My Documents\NoteApp.notes"))
-            using(JsonReader reader=new JsonTextReader(sr))
-            {
-                //Вызываем десериализацию и явно преобразуем результат в целевой тип данных 
-                note = (Note)serializer.Deserialize<Note>(reader);
-            }
+                //Открываем поток для чтения из файла с указанием пути
+                using (StreamReader sr = new StreamReader(@"C:\Users\Голиков Юрий\NoteApp.txt"))
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    //Вызываем десериализацию и явно преобразуем результат в целевой тип данных 
+                    note = (Note)serializer.Deserialize<Note>(reader);
+                }
         }
     }
 }

@@ -17,7 +17,6 @@ namespace NoteAppUI
     public partial class AddNote : Form
     {
         public Note _currentNote = new Note();
-        Project project = new Project();
 
         public AddNote()
         {
@@ -48,13 +47,12 @@ namespace NoteAppUI
                 this.DialogResult = DialogResult.OK;
 
                 Note note = new Note();
+                Project project = new Project();
                 //Передаем данные в класс Note для проверки
                 note.Name = AddNameTextBox.Text;
                 note.CreationTime = AddCreateDateTimePicker.Value;
                 note.NoteText = AddTextNoteTextBox.Text;
                 note.NoteCategory = AddCategoryComboBox.Text;
-
-                project.Notes.Add(note);
 
                 //Передаем данные в абстрактный класс _currentNote
                 _currentNote.Name = AddNameTextBox.Text;

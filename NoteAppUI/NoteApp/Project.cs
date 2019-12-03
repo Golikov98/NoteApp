@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace NoteApp
 {
+    [Serializable]
     public class Project
     {
         public List<Note> Notes = new List<Note>();
