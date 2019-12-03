@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace NoteApp
 {
@@ -32,43 +33,65 @@ namespace NoteApp
         /// <param name="_name">Имя по умолчанию-"Без названия", длина имени не должна превышать 50 символов.</param>
         private string _name;
 
-        public string GetName() { return _name; }
-
-        //Выполяем проверку длины названия заметки
-        public void SetName(string name)
+        public string Name
         {
-            if (name.Length <= 50)
+            get
             {
-                if (name.Length == 0)
+                return _name;
+            }
+            set
+            {
+                _name = value;
+
+                //Выполняем проверку длины имени заметки
+                if (_name.Length <= 50)
                 {
-                    name = "Без названия";
+                    if (_name.Length == 0)
+                    {
+                        _name = "Без названия";
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Имя заметки более 50 символов!");
                 }
             }
-            else
-            {
-                throw new ArgumentException("Неверно введено имя заметки!");
-            }
-            _name = name;
         }
+
 
         /// <summary>
         /// Возвращает и задает категорию заметки.
         /// </summary>
         private string _noteCategory;
 
-        public string GetNoteCategory() { return _noteCategory; }
-
-        public  void SetNoteCategory(string noteCategory) { _noteCategory = noteCategory; }
-
+        public string NoteCategory
+        {
+            get
+            {
+                return _noteCategory;
+            }
+            set
+            {
+                _noteCategory = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает текст заметки.
         /// </summary>
         private string _noteText;
 
-        public string GetNoteText() { return _noteText; }
-
-        public void SetNoteText(string noteText) { _noteText = noteText; }
+        public string NoteText
+        {
+            get
+            {
+                return _noteText;
+            }
+            set
+            {
+                _noteText = value;
+            }
+        }
 
         /// <summary>
         /// Метод для установки даты создания заметки.
@@ -78,20 +101,27 @@ namespace NoteApp
         /// </param>
         private static DateTime _creationTime;
 
-        public DateTime GetCreationTime() { return _creationTime; }
-
-        public void SetCreationTime(DateTime creationTime)
+        public DateTime CreationTime
         {
-            if (creationTime > DateTime.Now)
+            get
             {
-                throw new ArgumentException("Неверная дата создания заметки!");
-            } else if (creationTime < DateTime.Today)
-            {
-                throw new ArgumentException("Неверная дата создания заметки!");
+                return _creationTime;
             }
-            _creationTime = creationTime;
-        }
+            set
+            {
+                _creationTime = value;
 
+                //Проверяем дату создания заметки
+                if (_creationTime > DateTime.Now)
+                {
+                    throw new ArgumentException("Неверная дата создания заметки!");
+                }
+                else if (_creationTime < DateTime.Today)
+                {
+                    throw new ArgumentException("Неверная дата создания заметки!");
+                }
+            }
+        }
 
         /// <summary>
         ///Метод для установки даты изменения заметки.
@@ -101,15 +131,22 @@ namespace NoteApp
         /// </param>
         private DateTime _modifiedTime;
 
-        public DateTime GetModifiedTime() { return _modifiedTime; }
-
-        public void SetModifiedTime(DateTime modifiedTime)
+        public DateTime ModifiedTime
         {
-            if (modifiedTime < _creationTime)
+            get
             {
-                throw new ArgumentException("Неверная дата редактирования заметки!");
+                return _modifiedTime;
             }
-            _modifiedTime = modifiedTime;
+            set
+            {
+                _modifiedTime = value;
+
+                //Проверяем дату редактирования заметки
+                if (_modifiedTime < _creationTime)
+                {
+                    throw new ArgumentException("Неверная дата редактирования заметки!");
+                }
+            }
         }
 
         //Интерфейс клонирования заметок с одинаковыми названиями

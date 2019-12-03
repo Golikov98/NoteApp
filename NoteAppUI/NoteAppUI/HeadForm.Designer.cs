@@ -1,6 +1,6 @@
 ﻿namespace NoteAppUI
 {
-    partial class HeadForm
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HeadForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.TitleListBox = new System.Windows.Forms.ListBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.NoteTextTextBox = new System.Windows.Forms.TextBox();
@@ -40,10 +40,23 @@
             this.HeadNoteCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.HeadCreationTimeLabel = new System.Windows.Forms.Label();
             this.HeadModifiedTimeLabel = new System.Windows.Forms.Label();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьНовуюЗаметкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьТекущуюЗаметкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеF1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleListBox
             // 
+            this.TitleListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.TitleListBox.BackColor = System.Drawing.Color.White;
             this.TitleListBox.FormattingEnabled = true;
             this.TitleListBox.Location = new System.Drawing.Point(12, 70);
@@ -54,7 +67,10 @@
             // 
             // NameTextBox
             // 
+            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTextBox.BackColor = System.Drawing.Color.White;
+            this.NameTextBox.Enabled = false;
             this.NameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NameTextBox.Location = new System.Drawing.Point(337, 31);
             this.NameTextBox.Multiline = true;
@@ -66,7 +82,11 @@
             // 
             // NoteTextTextBox
             // 
+            this.NoteTextTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextTextBox.BackColor = System.Drawing.Color.White;
+            this.NoteTextTextBox.Enabled = false;
             this.NoteTextTextBox.Location = new System.Drawing.Point(194, 103);
             this.NoteTextTextBox.Multiline = true;
             this.NoteTextTextBox.Name = "NoteTextTextBox";
@@ -98,6 +118,7 @@
             this.EditButton.Size = new System.Drawing.Size(36, 40);
             this.EditButton.TabIndex = 4;
             this.EditButton.UseVisualStyleBackColor = false;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // DeleteButton
             // 
@@ -109,6 +130,7 @@
             this.DeleteButton.Size = new System.Drawing.Size(36, 40);
             this.DeleteButton.TabIndex = 5;
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // CreateDateTimePicker
             // 
@@ -143,6 +165,9 @@
             // 
             // HeadCreationTimeLabel
             // 
+            this.HeadCreationTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HeadCreationTimeLabel.AutoSize = true;
             this.HeadCreationTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.HeadCreationTimeLabel.Location = new System.Drawing.Point(223, 80);
@@ -153,6 +178,9 @@
             // 
             // HeadModifiedTimeLabel
             // 
+            this.HeadModifiedTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HeadModifiedTimeLabel.AutoSize = true;
             this.HeadModifiedTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.HeadModifiedTimeLabel.Location = new System.Drawing.Point(527, 80);
@@ -160,6 +188,88 @@
             this.HeadModifiedTimeLabel.Size = new System.Drawing.Size(118, 16);
             this.HeadModifiedTimeLabel.TabIndex = 10;
             this.HeadModifiedTimeLabel.Text = "Дата изменения:";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.сохранитьToolStripMenuItem1});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.сохранитьToolStripMenuItem.Text = "Выйти";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
+            // 
+            // сохранитьToolStripMenuItem1
+            // 
+            this.сохранитьToolStripMenuItem1.Name = "сохранитьToolStripMenuItem1";
+            this.сохранитьToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.сохранитьToolStripMenuItem1.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem1.Click += new System.EventHandler(this.сохранитьToolStripMenuItem1_Click);
+            // 
+            // редактироватьToolStripMenuItem
+            // 
+            this.редактироватьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.создатьНовуюЗаметкуToolStripMenuItem,
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem,
+            this.удалитьТекущуюЗаметкуToolStripMenuItem});
+            this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
+            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.редактироватьToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.редактироватьToolStripMenuItem_Click);
+            // 
+            // создатьНовуюЗаметкуToolStripMenuItem
+            // 
+            this.создатьНовуюЗаметкуToolStripMenuItem.Name = "создатьНовуюЗаметкуToolStripMenuItem";
+            this.создатьНовуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
+            this.создатьНовуюЗаметкуToolStripMenuItem.Text = "Создать новую заметку";
+            this.создатьНовуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.создатьНовуюЗаметкуToolStripMenuItem_Click);
+            // 
+            // редактироватьТекущуюЗаметкуToolStripMenuItem
+            // 
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Name = "редактироватьТекущуюЗаметкуToolStripMenuItem";
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Text = "Редактировать текущую заметку";
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.редактироватьТекущуюЗаметкуToolStripMenuItem_Click);
+            // 
+            // удалитьТекущуюЗаметкуToolStripMenuItem
+            // 
+            this.удалитьТекущуюЗаметкуToolStripMenuItem.Name = "удалитьТекущуюЗаметкуToolStripMenuItem";
+            this.удалитьТекущуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
+            this.удалитьТекущуюЗаметкуToolStripMenuItem.Text = "Удалить текущую заметку";
+            this.удалитьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьТекущуюЗаметкуToolStripMenuItem_Click);
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оПрограммеF1ToolStripMenuItem});
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // оПрограммеF1ToolStripMenuItem
+            // 
+            this.оПрограммеF1ToolStripMenuItem.Name = "оПрограммеF1ToolStripMenuItem";
+            this.оПрограммеF1ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.оПрограммеF1ToolStripMenuItem.Text = "О программе- F1";
+            this.оПрограммеF1ToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеF1ToolStripMenuItem_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
+            this.редактироватьToolStripMenuItem,
+            this.справкаToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // HeadForm
             // 
@@ -178,9 +288,15 @@
             this.Controls.Add(this.NoteTextTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.TitleListBox);
+            this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "HeadForm";
             this.Text = "NoteApp";
             this.Load += new System.EventHandler(this.NoteApp_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HeadForm_KeyUp);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,6 +315,16 @@
         private System.Windows.Forms.ComboBox HeadNoteCategoryComboBox;
         private System.Windows.Forms.Label HeadCreationTimeLabel;
         private System.Windows.Forms.Label HeadModifiedTimeLabel;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьНовуюЗаметкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьТекущуюЗаметкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьТекущуюЗаметкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеF1ToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem1;
     }
 }
 

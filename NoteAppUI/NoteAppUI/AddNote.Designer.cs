@@ -43,6 +43,7 @@
             // 
             // AddOKButton
             // 
+            this.AddOKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddOKButton.BackColor = System.Drawing.SystemColors.Window;
             this.AddOKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddOKButton.ForeColor = System.Drawing.SystemColors.Window;
@@ -56,6 +57,7 @@
             // 
             // AddCANCELButton
             // 
+            this.AddCANCELButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AddCANCELButton.BackColor = System.Drawing.SystemColors.Window;
             this.AddCANCELButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddCANCELButton.ForeColor = System.Drawing.SystemColors.Window;
@@ -79,6 +81,8 @@
             // 
             // AddNameTextBox
             // 
+            this.AddNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddNameTextBox.Location = new System.Drawing.Point(124, 12);
             this.AddNameTextBox.Multiline = true;
@@ -89,6 +93,9 @@
             // 
             // AddTextNoteTextBox
             // 
+            this.AddTextNoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddTextNoteTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddTextNoteTextBox.Location = new System.Drawing.Point(11, 163);
             this.AddTextNoteTextBox.Multiline = true;
@@ -119,6 +126,7 @@
             // 
             // AddCategoryComboBox
             // 
+            this.AddCategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AddCategoryComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddCategoryComboBox.FormattingEnabled = true;
             this.AddCategoryComboBox.Location = new System.Drawing.Point(623, 65);
@@ -129,6 +137,7 @@
             // 
             // NoteCategoryLabel
             // 
+            this.NoteCategoryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteCategoryLabel.AutoSize = true;
             this.NoteCategoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NoteCategoryLabel.Location = new System.Drawing.Point(457, 65);
@@ -139,6 +148,8 @@
             // 
             // AddNoteTextLabel
             // 
+            this.AddNoteTextLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddNoteTextLabel.AutoSize = true;
             this.AddNoteTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddNoteTextLabel.Location = new System.Drawing.Point(301, 136);
@@ -165,6 +176,7 @@
             this.Controls.Add(this.AddOKButton);
             this.Name = "AddNote";
             this.Text = "AddNote";
+            this.Load += new System.EventHandler(this.AddNote_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

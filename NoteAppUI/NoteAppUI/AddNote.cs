@@ -16,6 +16,7 @@ namespace NoteAppUI
     /// </summary>
     public partial class AddNote : Form
     {
+        public Note _currentNote = new Note();
         Project project = new Project();
 
         public AddNote()
@@ -42,22 +43,47 @@ namespace NoteAppUI
         //Кнопка, подтверждающая создание заметки 
         private void AddOKButton_Click(object sender, EventArgs e)
         {
-            Note note = new Note();
-            //Передаем данные в класс Note для проверки
-            note.SetName(AddNameTextBox.Text);
-            note.SetCreationTime(AddCreateDateTimePicker.Value);
-            note.SetNoteText(AddTextNoteTextBox.Text);
-            note.SetNoteCategory(AddCategoryComboBox.ToString());
-            //Записываем объект note в список Notes
-            project.Notes.Add(note);
+            if (AddNameTextBox.TextLength <= 50)
+            {
+                this.DialogResult = DialogResult.OK;
 
-            this.DialogResult = DialogResult.OK;
+                Note note = new Note();
+                //Передаем данные в класс Note для проверки
+                note.Name = AddNameTextBox.Text;
+                note.CreationTime = AddCreateDateTimePicker.Value;
+                note.NoteText = AddTextNoteTextBox.Text;
+                note.NoteCategory = AddCategoryComboBox.Text;
+
+                project.Notes.Add(note);
+
+                //Передаем данные в абстрактный класс _currentNote
+                _currentNote.Name = AddNameTextBox.Text;
+                _currentNote.NoteText = AddTextNoteTextBox.Text;
+                _currentNote.CreationTime = AddCreateDateTimePicker.Value;
+                _currentNote.NoteCategory = AddCategoryComboBox.Text;
+                _currentNote.ModifiedTime = DateTime.Now;
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Длина имени заметки должна быть больше либо равна 50 символам!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Show();
+            }
         }
 
         //TextBox названия создаваемой заметки
         private void AddNameTextBox_TextChanged(object sender, EventArgs e)
         {
+            string AddName = AddNameTextBox.Text;
 
+            //Выполняем проверку на количество введенных символов
+            if (AddName.Length >= 50)
+            {
+                AddNameTextBox.BackColor = Color.LightSalmon;
+            }
+            else
+            {
+                AddNameTextBox.BackColor = Color.White;
+            }
         }
 
         //DateTimePicker времени создания заметки
@@ -74,6 +100,11 @@ namespace NoteAppUI
 
         //TextBox текста создаваемой заметки
         private void AddTextNoteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNote_Load(object sender, EventArgs e)
         {
 
         }
