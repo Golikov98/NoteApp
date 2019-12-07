@@ -21,6 +21,7 @@ namespace NoteAppUI
         public AddNote()
         {
             InitializeComponent();
+
             //Передаем значения в ComboBox
             AddCategoryComboBox.Items.Add(NoteCategoryEnum.Documents);
             AddCategoryComboBox.Items.Add(NoteCategoryEnum.Finance);
@@ -29,6 +30,7 @@ namespace NoteAppUI
             AddCategoryComboBox.Items.Add(NoteCategoryEnum.HealthAndSports);
             AddCategoryComboBox.Items.Add(NoteCategoryEnum.Home);
             AddCategoryComboBox.Items.Add(NoteCategoryEnum.Other);
+           
             //Устанавливаем индекс значения по умолчанию в ComboBox
             AddCategoryComboBox.SelectedIndex = 6;
         }
@@ -50,16 +52,17 @@ namespace NoteAppUI
                 Project project = new Project();
                 //Передаем данные в класс Note для проверки
                 note.Name = AddNameTextBox.Text;
-                note.CreationTime = AddCreateDateTimePicker.Value;
+                note.CreationTime = DateTime.Now;
                 note.NoteText = AddTextNoteTextBox.Text;
                 note.NoteCategory = AddCategoryComboBox.Text;
+                note.ModifiedTime = DateTime.MaxValue;
 
                 //Передаем данные в абстрактный класс _currentNote
                 _currentNote.Name = AddNameTextBox.Text;
                 _currentNote.NoteText = AddTextNoteTextBox.Text;
-                _currentNote.CreationTime = AddCreateDateTimePicker.Value;
+                _currentNote.CreationTime = DateTime.Now;
                 _currentNote.NoteCategory = AddCategoryComboBox.Text;
-                _currentNote.ModifiedTime = DateTime.Now;
+                _currentNote.ModifiedTime = DateTime.MaxValue;
             }
             else
             {

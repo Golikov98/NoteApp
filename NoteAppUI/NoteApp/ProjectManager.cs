@@ -18,7 +18,7 @@ namespace NoteApp
         /// </summary>
         public static void SaveToFIle(Project Notes, string ProjectList)
         {
-            ProjectList= JsonConvert.SerializeObject(Notes, Formatting.Indented);
+            ProjectList = JsonConvert.SerializeObject(Notes, Formatting.Indented);
             StreamWriter SW = new StreamWriter(new FileStream(@"C:\Users\Голиков Юрий\NoteApp.txt", FileMode.Create, FileAccess.Write));
             SW.Write(ProjectList);
             SW.Close();
@@ -27,10 +27,12 @@ namespace NoteApp
         /// <summary>
         /// Метод LoadFromFile, который десериализует объект
         /// </summary>
-        public static void LoadFromFile(string ProjectList)
+        public static Project LoadFromFile(string ProjectList)
         {
+            try
+            {
                 //Создаем переменную в которую помещаем результат десериализации
-                Note note = null;
+                Project project = null;
 
                 //Создаем результат сериализации
                 JsonSerializer serializer = new JsonSerializer();
@@ -40,8 +42,14 @@ namespace NoteApp
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     //Вызываем десериализацию и явно преобразуем результат в целевой тип данных 
-                    note = (Note)serializer.Deserialize<Note>(reader);
+                    project = (Project)serializer.Deserialize<Project>(reader);
                 }
+                return project;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

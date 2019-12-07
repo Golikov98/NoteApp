@@ -29,7 +29,7 @@ namespace NoteAppUI
                     EditNameTextBox.Text = _editNote.Name;
                     EditCategoryComboBox.Text = _editNote.NoteCategory;
                     EditNoteTextTextBox.Text = _editNote.NoteText;
-                    EditFormEditDateDateTimePicker.Value = _editNote.ModifiedTime;
+                    EditFormEditDateDateTimePicker.Value = DateTime.Now;
                 }
             }
         }
@@ -69,12 +69,15 @@ namespace NoteAppUI
                     EditNameTextBox.BackColor = Color.White;
                 }
             }
-            catch { this.Show(); }
+            catch
+            {
+                this.Show();
+            }
         }
 
         private void EditFormEditDateDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            _editNote.ModifiedTime = DateTime.Now;
+            //_editNote.ModifiedTime = DateTime.Now;
         }
 
         private void EditCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
