@@ -18,9 +18,16 @@ namespace NoteApp
         /// </summary>
         public static void SaveToFIle(Project Notes, string ProjectList)
         {
+            //Записываем в строку "ProjectList" результат сериализации объекта "Notes"
             ProjectList = JsonConvert.SerializeObject(Notes, Formatting.Indented);
+
+            //Указываем путь к файлу "NoteApp.txt", в который будем записывать данные
             StreamWriter SW = new StreamWriter(new FileStream(@"C:\Users\Голиков Юрий\NoteApp.txt", FileMode.Create, FileAccess.Write));
+
+            //Записываем данные из "ProjectList" в файл по указанному пути
             SW.Write(ProjectList);
+
+            //Закрываем файл
             SW.Close();
         }
 

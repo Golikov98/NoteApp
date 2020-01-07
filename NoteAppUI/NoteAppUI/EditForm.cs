@@ -26,16 +26,17 @@ namespace NoteAppUI
                 _editNote = value;
                 if (_editNote != null)
                 {
-                    EditNameTextBox.Text = _editNote.Name;
-                    EditCategoryComboBox.Text = _editNote.NoteCategory;
-                    EditNoteTextTextBox.Text = _editNote.NoteText;
-                    EditFormEditDateDateTimePicker.Value = DateTime.Now;
+                        EditNameTextBox.Text = _editNote.Name;
+                        EditCategoryComboBox.Text = _editNote.NoteCategory;
+                        EditNoteTextTextBox.Text = _editNote.NoteText;
+                        EditFormEditDateDateTimePicker.Value = _editNote.ModifiedTime;                    
                 }
             }
         }
         public EditForm()
         {
             InitializeComponent();
+
             //Передаем значения в ComboBox
             EditCategoryComboBox.Items.Add(NoteCategoryEnum.Documents);
             EditCategoryComboBox.Items.Add(NoteCategoryEnum.Finance);
@@ -55,8 +56,6 @@ namespace NoteAppUI
         {
             try
             {
-                _editNote.Name = EditNameTextBox.Text;
-
                 string EditName = EditNameTextBox.Text;
 
                 //Выполняем проверку на введенное количество символов
@@ -77,17 +76,17 @@ namespace NoteAppUI
 
         private void EditFormEditDateDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            //_editNote.ModifiedTime = DateTime.Now;
+            
         }
 
         private void EditCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _editNote.NoteCategory = EditCategoryComboBox.Text;
+            
         }
 
         private void EditNoteTextTextBox_TextChanged(object sender, EventArgs e)
         {
-            _editNote.NoteText = EditNoteTextTextBox.Text;
+
         }
 
         private void EditFormOkButton_Click(object sender, EventArgs e)
@@ -95,6 +94,10 @@ namespace NoteAppUI
             if (EditNameTextBox.TextLength <= 50)
             {
                 DialogResult = DialogResult.OK;
+                _editNote.Name = EditNameTextBox.Text;
+                _editNote.ModifiedTime = DateTime.Now;
+                _editNote.NoteCategory = EditCategoryComboBox.Text;
+                _editNote.NoteText = EditNoteTextTextBox.Text;
                 this.Close();
             }
             else

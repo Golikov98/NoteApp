@@ -54,6 +54,7 @@
             // EditCategoryComboBox
             // 
             this.EditCategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EditCategoryComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.EditCategoryComboBox.FormattingEnabled = true;
             this.EditCategoryComboBox.Location = new System.Drawing.Point(623, 65);

@@ -50,19 +50,20 @@ namespace NoteAppUI
 
                 Note note = new Note();
                 Project project = new Project();
+
                 //Передаем данные в класс Note для проверки
                 note.Name = AddNameTextBox.Text;
-                note.CreationTime = DateTime.Now;
+                note.CreationTime = DateTime.Today;
                 note.NoteText = AddTextNoteTextBox.Text;
                 note.NoteCategory = AddCategoryComboBox.Text;
-                note.ModifiedTime = DateTime.MaxValue;
+                note.ModifiedTime = DateTime.Now;
 
                 //Передаем данные в абстрактный класс _currentNote
                 _currentNote.Name = AddNameTextBox.Text;
                 _currentNote.NoteText = AddTextNoteTextBox.Text;
-                _currentNote.CreationTime = DateTime.Now;
+                _currentNote.CreationTime = DateTime.Today;
                 _currentNote.NoteCategory = AddCategoryComboBox.Text;
-                _currentNote.ModifiedTime = DateTime.MaxValue;
+                _currentNote.ModifiedTime = DateTime.Now;
             }
             else
             {

@@ -49,6 +49,7 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеF1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.CategoryTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,8 +58,9 @@
             this.TitleListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.TitleListBox.BackColor = System.Drawing.Color.White;
+            this.TitleListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TitleListBox.FormattingEnabled = true;
-            this.TitleListBox.Location = new System.Drawing.Point(12, 70);
+            this.TitleListBox.Location = new System.Drawing.Point(12, 77);
             this.TitleListBox.Name = "TitleListBox";
             this.TitleListBox.Size = new System.Drawing.Size(176, 368);
             this.TitleListBox.TabIndex = 0;
@@ -87,10 +89,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextTextBox.BackColor = System.Drawing.Color.White;
             this.NoteTextTextBox.Enabled = false;
-            this.NoteTextTextBox.Location = new System.Drawing.Point(194, 103);
+            this.NoteTextTextBox.Location = new System.Drawing.Point(194, 137);
             this.NoteTextTextBox.Multiline = true;
             this.NoteTextTextBox.Name = "NoteTextTextBox";
-            this.NoteTextTextBox.Size = new System.Drawing.Size(594, 335);
+            this.NoteTextTextBox.Size = new System.Drawing.Size(594, 308);
             this.NoteTextTextBox.TabIndex = 2;
             this.NoteTextTextBox.TextChanged += new System.EventHandler(this.NoteTextTextBox_TextChanged);
             // 
@@ -156,6 +158,7 @@
             // HeadNoteCategoryComboBox
             // 
             this.HeadNoteCategoryComboBox.BackColor = System.Drawing.Color.White;
+            this.HeadNoteCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.HeadNoteCategoryComboBox.FormattingEnabled = true;
             this.HeadNoteCategoryComboBox.Location = new System.Drawing.Point(12, 43);
             this.HeadNoteCategoryComboBox.Name = "HeadNoteCategoryComboBox";
@@ -202,7 +205,7 @@
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.сохранитьToolStripMenuItem.Text = "Выйти";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // редактироватьToolStripMenuItem
             // 
@@ -213,28 +216,28 @@
             this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
             this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
             this.редактироватьToolStripMenuItem.Text = "Редактировать";
-            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.редактироватьToolStripMenuItem_Click);
+            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // создатьНовуюЗаметкуToolStripMenuItem
             // 
             this.создатьНовуюЗаметкуToolStripMenuItem.Name = "создатьНовуюЗаметкуToolStripMenuItem";
             this.создатьНовуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.создатьНовуюЗаметкуToolStripMenuItem.Text = "Создать новую заметку";
-            this.создатьНовуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.создатьНовуюЗаметкуToolStripMenuItem_Click);
+            this.создатьНовуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.createNewNoteToolStripMenuItem_Click);
             // 
             // редактироватьТекущуюЗаметкуToolStripMenuItem
             // 
             this.редактироватьТекущуюЗаметкуToolStripMenuItem.Name = "редактироватьТекущуюЗаметкуToolStripMenuItem";
             this.редактироватьТекущуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.редактироватьТекущуюЗаметкуToolStripMenuItem.Text = "Редактировать текущую заметку";
-            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.редактироватьТекущуюЗаметкуToolStripMenuItem_Click);
+            this.редактироватьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.editCurrentNoteToolStripMenuItem_Click);
             // 
             // удалитьТекущуюЗаметкуToolStripMenuItem
             // 
             this.удалитьТекущуюЗаметкуToolStripMenuItem.Name = "удалитьТекущуюЗаметкуToolStripMenuItem";
             this.удалитьТекущуюЗаметкуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.удалитьТекущуюЗаметкуToolStripMenuItem.Text = "Удалить текущую заметку";
-            this.удалитьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьТекущуюЗаметкуToolStripMenuItem_Click);
+            this.удалитьТекущуюЗаметкуToolStripMenuItem.Click += new System.EventHandler(this.deleteCurrentNoteToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -249,7 +252,7 @@
             this.оПрограммеF1ToolStripMenuItem.Name = "оПрограммеF1ToolStripMenuItem";
             this.оПрограммеF1ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.оПрограммеF1ToolStripMenuItem.Text = "О программе- F1";
-            this.оПрограммеF1ToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеF1ToolStripMenuItem_Click);
+            this.оПрограммеF1ToolStripMenuItem.Click += new System.EventHandler(this.aboutF1ToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -263,12 +266,27 @@
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // CategoryTextBox
+            // 
+            this.CategoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CategoryTextBox.BackColor = System.Drawing.Color.White;
+            this.CategoryTextBox.Enabled = false;
+            this.CategoryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryTextBox.Location = new System.Drawing.Point(194, 103);
+            this.CategoryTextBox.Multiline = true;
+            this.CategoryTextBox.Name = "CategoryTextBox";
+            this.CategoryTextBox.Size = new System.Drawing.Size(594, 28);
+            this.CategoryTextBox.TabIndex = 12;
+            this.CategoryTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CategoryTextBox);
             this.Controls.Add(this.HeadModifiedTimeLabel);
             this.Controls.Add(this.HeadCreationTimeLabel);
             this.Controls.Add(this.HeadNoteCategoryComboBox);
@@ -316,6 +334,7 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеF1ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.TextBox CategoryTextBox;
     }
 }
 

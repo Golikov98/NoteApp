@@ -28,26 +28,40 @@ namespace NoteAppUI
             HeadNoteCategoryComboBox.Items.Add(NoteCategoryEnum.Home);
             HeadNoteCategoryComboBox.Items.Add(NoteCategoryEnum.Other);
             HeadNoteCategoryComboBox.Items.Add("All");
+
+            HeadNoteCategoryComboBox.SelectedIndex = 9;
         }
 
         private void NoteApp_Load(object sender, EventArgs e)
         {
+            //Записываем данные из файла в переменную "_project" при помощи метода LoadFromFile
             _project = ProjectManager.LoadFromFile(@"C:\Users\Голиков Юрий\NoteApp.txt");
+
+            //Проверяем значение переменной "_project"
             if (_project == null)
             {
                 _project = new Project();
                 _project.Notes = new List<Note>();
             }
+
+            //Очищаем TitleListBox
             TitleListBox.Items.Clear();
+
             try
             {
                 for (var NoteNumber = 0; NoteNumber < _project.Notes.Count; NoteNumber++)
                 {
+                    //Записываем данные из списка Notes в переменную "item"
                     var item = _project.Notes[NoteNumber];
+
+                    //Записываем имя заметки из переменной "item" в TitleListBox
                     TitleListBox.Items.Add(item.Name);
                 }
             }
-            catch { }
+            catch
+            {
+
+            }
         }
 
         //Кнопка для создания заметки
@@ -63,7 +77,7 @@ namespace NoteAppUI
 
         private void HeadNoteCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         public void TitleListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,8 +96,9 @@ namespace NoteAppUI
                     //Присваиваем полям значения из переменной списка
                     NameTextBox.Text = _clicklist.Name;
                     NoteTextTextBox.Text = _clicklist.NoteText;
-                    HeadNoteCategoryComboBox.Text = _clicklist.NoteCategory;
+                    CategoryTextBox.Text = _clicklist.NoteCategory;
                     CreateDateTimePicker.Value = _clicklist.CreationTime;
+                    ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
                 }
             }
             catch
@@ -120,38 +135,38 @@ namespace NoteAppUI
         }
 
         //Поле "Редактировать" ToolStripMenu
-        private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
         //Значение "СоздатьНовуюЗаметку" в поле "Редактировать" ToolStripMenu
-        private void создатьНовуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
+        private void createNewNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddFunction();
         }
 
         //Значение "РедактироватьТекущуюЗаметку" в поле "Редактировать" ToolStripMenu
-        private void редактироватьТекущуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editCurrentNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditFunction();
         }
 
         //Значение "УдалитьТекущуюЗаметку" в поле "Редактировать" ToolStripMenu
-        private void удалитьТекущуюЗаметкуToolStripMenuItem_Click(object sender, EventArgs e)
+        private void deleteCurrentNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteFunction();
         }
 
         //Значение "О программе-F1" в поле "Справка" ToolStripMenu
-        private void оПрограммеF1ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutF1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about=new AboutForm();
             about.Show();
         }
 
         //Значение "Выйти" в поле "Файл" ToolStripMenu
-        private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -181,7 +196,7 @@ namespace NoteAppUI
                     var MainCategory = form._currentNote.NoteCategory;
                     var MainText = form._currentNote.NoteText;
                     var MainCreationDate = form._currentNote.CreationTime;
-                    var MainModifiedDate = DateTime.Now;
+                    var MainModifiedDate = form._currentNote.ModifiedTime;
 
                     //Записываем в TitleListBox данные из MainName по индексу
                     TitleListBox.Items.Add(MainName);
@@ -231,14 +246,17 @@ namespace NoteAppUI
                 var MainModifiedDate = edit.EditNote.ModifiedTime;
                 TitleListBox.Items.Insert(selectedIndex, MainName);
 
-                //Передаем обновленные данные на элементы формы
-                NameTextBox.Text = MainName;
-                NoteTextTextBox.Text = MainText;
-                HeadNoteCategoryComboBox.Text = MainCategory;
-                ModifiedDateTimePicker.Value = DateTime.Now;
+                if (edit.DialogResult == DialogResult.OK)
+                {
+                    //Передаем обновленные данные на элементы формы
+                    NameTextBox.Text = MainName;
+                    NoteTextTextBox.Text = MainText;
+                    CategoryTextBox.Text = MainCategory;
+                    ModifiedDateTimePicker.Value = MainModifiedDate;
+                }
             }
             catch
-            {
+           {
                 DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 this.Show();
             }
@@ -267,7 +285,7 @@ namespace NoteAppUI
                     //Очищаем поля от записанных в них значений
                     NameTextBox.Clear();
                     NoteTextTextBox.Clear();
-                    HeadNoteCategoryComboBox.Text = string.Empty;
+                    CategoryTextBox.Text = string.Empty;
                 }
             }
             catch

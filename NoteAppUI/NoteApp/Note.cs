@@ -117,10 +117,6 @@ namespace NoteApp
                 {
                     throw new ArgumentException("Неверная дата создания заметки!");
                 }
-                else if (_creationTime < DateTime.Today)
-                {
-                    throw new ArgumentException("Неверная дата создания заметки!");
-                }
             }
         }
 
