@@ -42,6 +42,7 @@ namespace NoteAppUI
             {
                 _project = new Project();
                 _project.Notes = new List<Note>();
+                _project.CurrentNote = new Note();
             }
 
             //Очищаем TitleListBox
@@ -57,6 +58,16 @@ namespace NoteAppUI
                     //Записываем имя заметки из переменной "item" в TitleListBox
                     TitleListBox.Items.Add(item.Name);
                 }
+
+                //Записываем данные из свойства CurrentNote в переменную "CurrentLoadNote"
+                var CurrentLoadNote = _project.CurrentNote;
+
+                NameTextBox.Text = CurrentLoadNote.Name;
+                CategoryTextBox.Text = CurrentLoadNote.NoteCategory;
+                NoteTextTextBox.Text = CurrentLoadNote.NoteText;
+                CreateDateTimePicker.Value = CurrentLoadNote.CreationTime;
+                ModifiedDateTimePicker.Value = CurrentLoadNote.ModifiedTime;
+
             }
             catch
             {
@@ -77,7 +88,14 @@ namespace NoteAppUI
 
         private void HeadNoteCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if (HeadNoteCategoryComboBox.Text == "New")
+            {
+                _project.SortedModifiedTimeNew();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Old")
+            {
+                _project.SortedModifiedTimeOld();
+            }
         }
 
         public void TitleListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +117,11 @@ namespace NoteAppUI
                     CategoryTextBox.Text = _clicklist.NoteCategory;
                     CreateDateTimePicker.Value = _clicklist.CreationTime;
                     ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
+
+                    _project.CurrentNote = _clicklist;
+
+                    //Вызываем SaveToFile из класса ProjectManager
+                    ProjectManager.SaveToFIle(_project, @"C:\Users\Голиков Юрий\NoteApp.txt");
                 }
             }
             catch
@@ -168,16 +191,43 @@ namespace NoteAppUI
         //Значение "Выйти" в поле "Файл" ToolStripMenu
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Действительно хотите выйти?", "Выход", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (result == DialogResult.OK)
+            {
+                this.Close();
+            }
         }
 
-        //Обработчик на нажатие клавиши F1
+        //Обработчик на нажатие клавиши "F1", "Delete", "Add","Substract","Escape".
         private void HeadForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData==Keys.F1)
             {
                 var about = new AboutForm();
                 about.Show();
+            }
+            else if (e.KeyData == Keys.Delete)
+            {
+                DeleteFunction();
+            }
+            else if (e.KeyData == Keys.Subtract)
+            {
+                DeleteFunction();
+            }
+            else if(e.KeyData == Keys.Add)
+            {
+                AddFunction();
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                DialogResult result = MessageBox.Show("Действительно хотите выйти?", "Выход", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    //Вызываем SaveToFile из класса ProjectManager
+                    ProjectManager.SaveToFIle(_project, @"C:\Users\Голиков Юрий\NoteApp.txt");
+
+                    this.Close();
+                }
             }
         }
 
@@ -267,7 +317,7 @@ namespace NoteAppUI
         {
             try
             {
-                //Вызываем форму для удаления заметки
+                //Вызываем метод для удаления заметки
                 DialogResult result = MessageBox.Show("Действительно хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                 {
@@ -277,7 +327,7 @@ namespace NoteAppUI
 
                     //Удаляем данные по выбранному индексу
                     TitleListBox.Items.RemoveAt(selectedIndex);
-                    _project.Notes.RemoveAt(selectedIndex);
+                    _project.Notes.RemoveAt(selectedIndex);                   
 
                     //Вызываем SaveToFile из класса ProjectManager
                     ProjectManager.SaveToFIle(_project, @"C:\Users\Голиков Юрий\NoteApp.txt");
