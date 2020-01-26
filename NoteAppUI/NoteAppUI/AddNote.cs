@@ -61,7 +61,7 @@ namespace NoteAppUI
                 //Передаем данные в абстрактный класс _currentNote
                 _currentNote.Name = AddNameTextBox.Text;
                 _currentNote.NoteText = AddTextNoteTextBox.Text;
-                _currentNote.CreationTime = DateTime.Today;
+                _currentNote.CreationTime = DateTime.Today; 
                 _currentNote.NoteCategory = AddCategoryComboBox.Text;
                 _currentNote.ModifiedTime = DateTime.Now;
             }

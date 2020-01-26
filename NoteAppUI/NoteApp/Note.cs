@@ -24,9 +24,8 @@ namespace NoteApp
     ///«Текст заметки», «Время создания», «Время последнего изменения».
     ///</symmary>
     [Serializable]
-    public class Note:ICloneable
+    public class Note : ICloneable
     {
-
 
         /// <summary>
         /// Метод для установки имени заметки.

@@ -19,14 +19,29 @@ namespace NoteApp
         /// </summary>
         public List<Note> Notes = new List<Note>();
 
-        /*public void SortedModifiedTimeNew()
+        ///<summary>
+        ///Метод, сортирующий список заметок от новейшей к старшей (по времени редактирования заметки)
+        ///</summary>        
+        public void SortedModifiedTimeNew()
         {
-            Notes.Sort((x, y) => x.CreationTime.CompareTo(y.CreationTime));
+            Notes.Sort((x, y) => y.ModifiedTime.CompareTo(x.ModifiedTime));
         }
+
+        ///<summary>
+        ///Метод, сортирующий список заметок от старшей к новейшей (по времени редактирования заметки)
+        ///</summary> 
         public void SortedModifiedTimeOld()
         {
-            Notes.Sort((x, y) => y.CreationTime.CompareTo(x.CreationTime));
-        }*/
+            Notes.Sort((x, y) => x.ModifiedTime.CompareTo(y.ModifiedTime));
+        }
+
+        /// <summary>
+        /// Перегруженный метод, сортирующий список заметок по категории заметки
+        /// </summary>
+        public void SortedNoteForNoteCtaegory(string Category)
+        {
+
+        }
 
         private Note _currentNote;
 

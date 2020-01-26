@@ -90,11 +90,97 @@ namespace NoteAppUI
         {
             if (HeadNoteCategoryComboBox.Text == "New")
             {
+                TitleListBox.Items.Clear();
                 _project.SortedModifiedTimeNew();
+                for(var ForTimeNew = 0; ForTimeNew < _project.Notes.Count; ForTimeNew++)
+                {
+                    var Data = _project.Notes[ForTimeNew];
+                    TitleListBox.Items.Add(Data.Name);
+                }
             }
             else if (HeadNoteCategoryComboBox.Text == "Old")
             {
+                TitleListBox.Items.Clear();
                 _project.SortedModifiedTimeOld();
+                for (var ForTimeOld = 0; ForTimeOld < _project.Notes.Count; ForTimeOld++)
+                {
+                    var Data = _project.Notes[ForTimeOld];
+                    TitleListBox.Items.Add(Data.Name);
+                }
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Documents")
+            {
+                TitleListBox.Items.Clear();
+                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
+                for (var i = 0; i < _project.Notes.Count; i++)
+                {
+                    var SortedNotes = _project.Notes[i];
+                    if (SortedNotes.NoteCategory == "Documents")
+                    {
+                        TitleListBox.Items.Add(SortedNotes.Name);
+                    }
+                }
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Finance")
+            {
+                TitleListBox.Items.Clear();
+                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
+                for (var i = 0; i < _project.Notes.Count; i++)
+                {
+                    var SortedNotes = _project.Notes[i];
+                    if (SortedNotes.NoteCategory == "Finance")
+                    {
+                        TitleListBox.Items.Add(SortedNotes.Name);
+                    }
+                }
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Work")
+            {
+                TitleListBox.Items.Clear();
+                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
+                for (var i = 0; i < _project.Notes.Count; i++)
+                {
+                    var SortedNotes = _project.Notes[i];
+                    if (SortedNotes.NoteCategory == "Work")
+                    {
+                        TitleListBox.Items.Add(SortedNotes.Name);
+                    }
+                }
+            }
+            else if (HeadNoteCategoryComboBox.Text == "People")
+            {
+                TitleListBox.Items.Clear();
+                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
+                for (var i = 0; i < _project.Notes.Count; i++)
+                {
+                    var SortedNotes = _project.Notes[i];
+                    if (SortedNotes.NoteCategory == "People")
+                    {
+                        TitleListBox.Items.Add(SortedNotes.Name);
+                    }
+                }
+            }
+            else if (HeadNoteCategoryComboBox.Text == "HealthAndSports")
+            {
+               
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Home")
+            {
+                
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Other")
+            {
+               
+            }
+            else if (HeadNoteCategoryComboBox.Text == "All")
+            {
+                TitleListBox.Items.Clear();
+
+                for (var z = 0; z < _project.Notes.Count; z++)
+                {
+                    var Data = _project.Notes[z];
+                        TitleListBox.Items.Add(Data.Name);
+                }
             }
         }
 
