@@ -36,12 +36,18 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Перегруженный метод, сортирующий список заметок по категории заметки
+        /// Перегруженный метод, фильтрующий список заметок по категории заметки и сортирующий список SortResult
+        /// по времени редактирования заметки
         /// </summary>
-        public void SortedNoteForNoteCtaegory(string Category)
+        public List<Note> SortedNoteForNoteCtaegory(string Category)
         {
-
+            List<Note> SortResult = (from item in Notes where item.NoteCategory == Category select item).ToList();
+            SortResult.Sort((x, y) => y.ModifiedTime.CompareTo(x.ModifiedTime));
+            SortedResult = SortResult;
+            return SortResult;
         }
+
+        public List<Note> SortedResult;
 
         private Note _currentNote;
 

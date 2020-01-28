@@ -14,6 +14,7 @@ namespace NoteAppUI
     public partial class MainForm : Form
     {
         private Project _project = new Project();
+        List<Note> list = new List<Note>();
 
         public MainForm()
         {  
@@ -110,76 +111,39 @@ namespace NoteAppUI
             }
             else if (HeadNoteCategoryComboBox.Text == "Documents")
             {
-                TitleListBox.Items.Clear();
-                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
-                for (var i = 0; i < _project.Notes.Count; i++)
-                {
-                    var SortedNotes = _project.Notes[i];
-                    if (SortedNotes.NoteCategory == "Documents")
-                    {
-                        TitleListBox.Items.Add(SortedNotes.Name);
-                    }
-                }
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "Finance")
             {
-                TitleListBox.Items.Clear();
-                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
-                for (var i = 0; i < _project.Notes.Count; i++)
-                {
-                    var SortedNotes = _project.Notes[i];
-                    if (SortedNotes.NoteCategory == "Finance")
-                    {
-                        TitleListBox.Items.Add(SortedNotes.Name);
-                    }
-                }
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "Work")
             {
-                TitleListBox.Items.Clear();
-                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
-                for (var i = 0; i < _project.Notes.Count; i++)
-                {
-                    var SortedNotes = _project.Notes[i];
-                    if (SortedNotes.NoteCategory == "Work")
-                    {
-                        TitleListBox.Items.Add(SortedNotes.Name);
-                    }
-                }
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "People")
             {
-                TitleListBox.Items.Clear();
-                _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
-                for (var i = 0; i < _project.Notes.Count; i++)
-                {
-                    var SortedNotes = _project.Notes[i];
-                    if (SortedNotes.NoteCategory == "People")
-                    {
-                        TitleListBox.Items.Add(SortedNotes.Name);
-                    }
-                }
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "HealthAndSports")
             {
-               
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "Home")
             {
-                
+                SortedCategory();
             }
             else if (HeadNoteCategoryComboBox.Text == "Other")
             {
-               
+                SortedCategory();
             }
-            else if (HeadNoteCategoryComboBox.Text == "All")
+            else if(HeadNoteCategoryComboBox.Text == "All")
             {
                 TitleListBox.Items.Clear();
-
-                for (var z = 0; z < _project.Notes.Count; z++)
+                for (var i = 0; i < _project.Notes.Count; i++)
                 {
-                    var Data = _project.Notes[z];
-                        TitleListBox.Items.Add(Data.Name);
+                    var Data = _project.Notes[i];
+                    TitleListBox.Items.Add(Data.Name);
                 }
             }
         }
@@ -194,17 +158,67 @@ namespace NoteAppUI
                     //Создаем локальную переменную типа Note
                     Note _clicklist;
 
-                    //Присваиваем переменной данные из списка по индексу
-                    _clicklist = _project.Notes[TitleListBox.SelectedIndex];
+                    if (HeadNoteCategoryComboBox.Text == "All")
+                    {
+                        //Присваиваем переменной данные из списка по индексу
+                        _clicklist = _project.Notes[TitleListBox.SelectedIndex];
 
-                    //Присваиваем полям значения из переменной списка
-                    NameTextBox.Text = _clicklist.Name;
-                    NoteTextTextBox.Text = _clicklist.NoteText;
-                    CategoryTextBox.Text = _clicklist.NoteCategory;
-                    CreateDateTimePicker.Value = _clicklist.CreationTime;
-                    ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
 
-                    _project.CurrentNote = _clicklist;
+                        //Присваиваем полям значения из переменной списка
+                        NameTextBox.Text = _clicklist.Name;
+                        NoteTextTextBox.Text = _clicklist.NoteText;
+                        CategoryTextBox.Text = _clicklist.NoteCategory;
+                        CreateDateTimePicker.Value = _clicklist.CreationTime;
+                        ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
+
+                        _project.CurrentNote = _clicklist;
+                    }
+                    else if(HeadNoteCategoryComboBox.Text == "New")
+                    {
+                        //Присваиваем переменной данные из списка по индексу
+                        _clicklist = _project.Notes[TitleListBox.SelectedIndex];
+
+
+                        //Присваиваем полям значения из переменной списка
+                        NameTextBox.Text = _clicklist.Name;
+                        NoteTextTextBox.Text = _clicklist.NoteText;
+                        CategoryTextBox.Text = _clicklist.NoteCategory;
+                        CreateDateTimePicker.Value = _clicklist.CreationTime;
+                        ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
+
+                        _project.CurrentNote = _clicklist;
+                    }
+                    else if (HeadNoteCategoryComboBox.Text == "Old")
+                    {
+                        //Присваиваем переменной данные из списка по индексу
+                        _clicklist = _project.Notes[TitleListBox.SelectedIndex];
+
+
+                        //Присваиваем полям значения из переменной списка
+                        NameTextBox.Text = _clicklist.Name;
+                        NoteTextTextBox.Text = _clicklist.NoteText;
+                        CategoryTextBox.Text = _clicklist.NoteCategory;
+                        CreateDateTimePicker.Value = _clicklist.CreationTime;
+                        ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
+
+                        _project.CurrentNote = _clicklist;
+                    }
+                    else
+                    {
+                        //Присваиваем переменной данные из списка по индексу
+                        _clicklist = _project.SortedResult[TitleListBox.SelectedIndex];
+
+
+                        //Присваиваем полям значения из переменной списка
+                        NameTextBox.Text = _clicklist.Name;
+                        NoteTextTextBox.Text = _clicklist.NoteText;
+                        CategoryTextBox.Text = _clicklist.NoteCategory;
+                        CreateDateTimePicker.Value = _clicklist.CreationTime;
+                        ModifiedDateTimePicker.Value = _clicklist.ModifiedTime;
+
+                        _project.CurrentNote = _clicklist;
+                    }
+
 
                     //Вызываем SaveToFile из класса ProjectManager
                     ProjectManager.SaveToFIle(_project, @"C:\Users\Голиков Юрий\NoteApp.txt");
@@ -234,13 +248,51 @@ namespace NoteAppUI
         //Кнопка для удаления заметки
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            DeleteFunction();
+            if (HeadNoteCategoryComboBox.Text == "All")
+            {
+                DeleteFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "New")
+            {
+                DeleteFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Old")
+            {
+                DeleteFunction();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Выберите, пожалуйста, категорию All", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    HeadNoteCategoryComboBox.Text = "All";
+                }
+            }
         }
 
         //Кнопка для редактирования заметки
         private void EditButton_Click(object sender, EventArgs e)
         {
-            EditFunction();
+            if (HeadNoteCategoryComboBox.Text == "All")
+            {
+                EditFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "New")
+            {
+                EditFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Old")
+            {
+                EditFunction();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Выберите, пожалуйста, категорию All", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    HeadNoteCategoryComboBox.Text = "All";
+                }
+            }
         }
 
         //Поле "Редактировать" ToolStripMenu
@@ -252,19 +304,58 @@ namespace NoteAppUI
         //Значение "СоздатьНовуюЗаметку" в поле "Редактировать" ToolStripMenu
         private void createNewNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            HeadNoteCategoryComboBox.Text = "All";
             AddFunction();
         }
 
         //Значение "РедактироватьТекущуюЗаметку" в поле "Редактировать" ToolStripMenu
         private void editCurrentNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditFunction();
+            if (HeadNoteCategoryComboBox.Text == "All")
+            {
+                EditFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "New")
+            {
+                EditFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Old")
+            {
+                EditFunction();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Выберите, пожалуйста, категорию All", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    HeadNoteCategoryComboBox.Text = "All";
+                }
+            }
         }
 
         //Значение "УдалитьТекущуюЗаметку" в поле "Редактировать" ToolStripMenu
         private void deleteCurrentNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteFunction();
+            if (HeadNoteCategoryComboBox.Text == "All")
+            {
+                DeleteFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "New")
+            {
+                DeleteFunction();
+            }
+            else if (HeadNoteCategoryComboBox.Text == "Old")
+            {
+                DeleteFunction();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Выберите, пожалуйста, категорию All", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    HeadNoteCategoryComboBox.Text = "All";
+                }
+            }
         }
 
         //Значение "О программе-F1" в поле "Справка" ToolStripMenu
@@ -320,8 +411,10 @@ namespace NoteAppUI
         //Метод создающий заметку
         private void AddFunction()
         {
-                //Переход на форму для создания заметки
-                var form = new AddNote();
+            HeadNoteCategoryComboBox.Text = "All";
+
+            //Переход на форму для создания заметки
+            var form = new AddNote();
                 form.ShowDialog();
 
                 //Проверка подтверждения с формы
@@ -403,6 +496,8 @@ namespace NoteAppUI
         {
             try
             {
+                HeadNoteCategoryComboBox.Text = "All";
+
                 //Вызываем метод для удаления заметки
                 DialogResult result = MessageBox.Show("Действительно хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
@@ -428,6 +523,22 @@ namespace NoteAppUI
             {
                 DialogResult result = MessageBox.Show("Вы не выбрали заметку!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 this.Show();
+            }
+        }
+
+        public void SortedCategory()
+        {
+            //Вызываем метод для фильрации списка Notes по HeadNodeCategoryComboBox.Text
+            _project.SortedNoteForNoteCtaegory(HeadNoteCategoryComboBox.Text);
+
+            TitleListBox.Items.Clear();
+
+            for (var i = 0; i < _project.SortedResult.Count; i++)
+            {
+                //Записываем данные из списка SortedResult
+                var DataSortedResult = _project.SortedResult[i];
+
+                TitleListBox.Items.Add(DataSortedResult.Name);
             }
         }
     }

@@ -26,7 +26,6 @@ namespace NoteApp
     [Serializable]
     public class Note : ICloneable
     {
-
         /// <summary>
         /// Метод для установки имени заметки.
         /// </summary>
