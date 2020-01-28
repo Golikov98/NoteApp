@@ -1,0 +1,19 @@
+{
+  "Notes": [
+    {
+      "Name": "123",
+      "NoteCategory": "Other",
+      "NoteText": "122",
+      "CreationTime": "2020-01-28T00:00:00+07:00",
+      "ModifiedTime": "2020-01-28T23:36:57.8689808+07:00"
+    }
+  ],
+  "SortedResult": null,
+  "CurrentNote": {
+    "Name": null,
+    "NoteCategory": null,
+    "NoteText": null,
+    "CreationTime": "2020-01-28T00:00:00+07:00",
+    "ModifiedTime": "0001-01-01T00:00:00"
+  }
+}
