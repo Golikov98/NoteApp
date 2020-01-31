@@ -47,6 +47,7 @@ namespace NoteApp
             return SortResult;
         }
 
+        //Результирующий список после выполнения фильтрации по категории SortedResult.
         public List<Note> SortedResult;
 
         private Note _currentNote;
