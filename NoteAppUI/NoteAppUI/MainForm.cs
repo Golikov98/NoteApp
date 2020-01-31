@@ -36,7 +36,7 @@ namespace NoteAppUI
         private void NoteApp_Load(object sender, EventArgs e)
         {
             //Записываем данные из файла в переменную "_project" при помощи метода LoadFromFile
-            _project = ProjectManager.LoadFromFile(@"C:..\\NoteApp.txt");
+            _project = ProjectManager.LoadFromFile(@"..\NoteApp.txt");
 
             //Проверяем значение переменной "_project"
             if (_project == null)
@@ -221,7 +221,7 @@ namespace NoteAppUI
 
 
                     //Вызываем SaveToFile из класса ProjectManager
-                    ProjectManager.SaveToFIle(_project, @"C:..\\NoteApp.txt");
+                    ProjectManager.SaveToFIle(_project, @"..\NoteApp.txt");
                 }
             }
             catch
@@ -434,7 +434,7 @@ namespace NoteAppUI
                     _project.Notes.Add(form._currentNote);
 
                     //Вызываем SaveToFile из класса ProjectManager
-                    ProjectManager.SaveToFIle(_project, @"C:..\\NoteApp.txt");
+                    ProjectManager.SaveToFIle(_project, @"..\NoteApp.txt");
                 }      
         }
 
@@ -466,7 +466,7 @@ namespace NoteAppUI
                 _project.Notes.Insert(selectedIndex, updatedNote);
 
                 //Вызываем SaveToFile из класса ProjectManager
-                ProjectManager.SaveToFIle(_project, @"C:..\\NoteApp.txt");
+                ProjectManager.SaveToFIle(_project, @"..\NoteApp.txt");
 
                 //Присваиваем значения локальным переменным
                 var MainName = edit.EditNote.Name;
@@ -511,7 +511,7 @@ namespace NoteAppUI
                     _project.Notes.RemoveAt(selectedIndex);                   
 
                     //Вызываем SaveToFile из класса ProjectManager
-                    ProjectManager.SaveToFIle(_project, @"C:..\\NoteApp.txt");
+                    ProjectManager.SaveToFIle(_project, @"..\NoteApp.txt");
 
                     //Очищаем поля от записанных в них значений
                     NameTextBox.Clear();

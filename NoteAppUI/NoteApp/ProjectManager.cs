@@ -22,7 +22,7 @@ namespace NoteApp
             ProjectList = JsonConvert.SerializeObject(Notes, Formatting.Indented); 
 
             //Указываем путь к файлу "NoteApp.txt", в который будем записывать данные
-            StreamWriter SW = new StreamWriter(new FileStream(@"C:..\\NoteApp.txt", FileMode.Create, FileAccess.Write));
+            StreamWriter SW = new StreamWriter(new FileStream(@"..\NoteApp.txt", FileMode.Create, FileAccess.Write));
 
             //Записываем данные из "ProjectList" в файл по указанному пути
             SW.Write(ProjectList);
@@ -45,7 +45,7 @@ namespace NoteApp
                 JsonSerializer serializer = new JsonSerializer();
 
                 //Открываем поток для чтения из файла с указанием пути
-                using (StreamReader sr = new StreamReader(@"C:..\\NoteApp.txt"))
+                using (StreamReader sr = new StreamReader(@"..\NoteApp.txt"))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     //Вызываем десериализацию и явно преобразуем результат в целевой тип данных 
